@@ -15,7 +15,7 @@ This project describe the DevOps CI/CD concepts. using Azure pipeline and Github
 ## Instructions
 The below diagram shows the project architecture.  
 
-![project architecture](screenshot/Architecture_of_CI_CD_Project.JPEG "project architecture")
+![project architecture](screenshot/Architecture_of_CI_CD_Project.png "project architecture")
 
 The source code are in GitHub repo, actually GitHub Actions perform CI. therefore once any change happend on repo the GitHub Actions can atomatically check the code by build and test.
 
@@ -38,13 +38,13 @@ Create python virtual env & source :
 odl_user [~/flask-project]$ python3 -m venv ~/.myrepo
 odl_user [~/flask-project]$ source ~/.myrepo/bin/activate
 ```
-![ GitHub Clone Repo](screenshot/github_clone.JPEG "Clone repo / GitHub Clone Repo")
+![ GitHub Clone Repo](screenshot/github_clone.jpeg "Clone repo / GitHub Clone Repo")
 
 Install needed packages and testing it:
 ```bash
 (.myrepo) odl_user [~/flask-project]$ make all
 ```
-![Build project](screenshot/make_all.JPEG "Build project")
+![Build project](screenshot/make_all.jpeg "Build project")
 
 Run the application locally:
 ```bash
@@ -58,7 +58,7 @@ odl_user [~]$ source ~/.myrepo/bin/activate
 (.myrepo) odl_user [~/flask-project]$ ./make_prediction.sh
 ```
 
-![Test locally](screenshot/prediction.JPEG "Test locally")
+![Test locally](screenshot/prediction.jpeg "Test locally")
 
 ### Provisioning CI using Github Actions
 Performe CI by using GitHub Action.
@@ -66,10 +66,10 @@ Performe CI by using GitHub Action.
 From the top bar of GitHub click on 'Actions', then click on "set up a workflow yourself' and use the GitHub Actions template yaml file located in  [.github/workflows/main.yml]
 
 Once you create this workflow, it will run automatically to build code in Repo:
-![GitHub Actions](screenshot/run_action.JPEG "GitHub Actions")
+![GitHub Actions](screenshot/run_action.jpeg "GitHub Actions")
 
 Passing GitHub Actions:
-![GitHub Actions](screenshot/passed_actions.JPEG "GitHub Actions")
+![GitHub Actions](screenshot/passed_actions.jpeg "GitHub Actions")
 
 ### Deploying to Azure App Services
 Deploy app to Azure app services locally using Azure CLI:
@@ -79,7 +79,7 @@ Deploy app to Azure app services locally using Azure CLI:
 
 Check app if it is become online by using the link from the previous step:
 
-![check webapp](screenshot/Azure_running_webapp.JPEG "check webapp")
+![check webapp](screenshot/Azure_running_webapp.jpeg "check webapp")
 
 Test the online app by invoke 'make_predict_azure_app.sh'  modify webapp name in the file
 Edit file 'make_predict_azure_app.sh' and replace '< yourappname >' with your webapp name (e.g. flask-abdulrazak).
@@ -88,7 +88,7 @@ Test the remote webapp:
 ```bash
 (.myrepo) odl_user [~/flask-project]$  ./make_predict_azure_app.sh
 ```
-![Test remotely](screenshot/remote_prediction.JPEG "Test remotely")
+![Test remotely](screenshot/remote_prediction.jpeg "Test remotely")
 
 Logs of webapp can be easily done by tail linux command:
 
@@ -98,7 +98,7 @@ open cloud shell
 (.myrepo) odl_user [~/flask-project]$ az webapp log tail
 ```
 
-![Log](screenshot/log.JPEG "Log")
+![Log](screenshot/log.jpeg "Log")
 
 validation of the webapp can be performed using [locust](https://locust.io).
 
@@ -106,7 +106,7 @@ Install locust tool
 
 (.myrepo) odl_user [~/flask-project]$ pip install locust
 
-![Install locust tool](screenshot/locust_install.JPEG "Install locust tool")
+![Install locust tool](screenshot/locust_install.jpeg "Install locust tool")
 
 Open Template file 'locustinput.py' and Replace '< yourappname >':
 ```bash
@@ -114,7 +114,7 @@ Open Template file 'locustinput.py' and Replace '< yourappname >':
 (.myrepo) odl_user [~/flask-project]$ locust -f locustinput.py --headless -u 10 -r 3 -t 10s
 ```
 
-![locust_test](screenshot/locust_log.JPEG "locust_test")
+![locust_test](screenshot/locust_log.jpeg "locust_test")
 
 ### Provisioning CI/CD using Azure Pipelines
 
@@ -132,11 +132,11 @@ Configure pipeline to deploy code to Azure app service 'that created in previous
 
 run the pipeline including the 'Build stage' and the 'Deploy Web App' based on yaml file:
 
-![Azure_pipeline_build_deploy](screenshot/Azure_pipeline_build_deploy.JPEG "Azure_pipeline_build_deploy")
+![Azure_pipeline_build_deploy](screenshot/Azure_pipeline_build_deploy.jpeg "Azure_pipeline_build_deploy")
 
 View pipeline log by click on build icon
 
-![Azure_pipeline_build_deploy_log](screenshot/Azure_pipeline_build_deploy_log.JPEG "Azure_pipeline_build_deploy_log")
+![Azure_pipeline_build_deploy_log](screenshot/Azure_pipeline_build_deploy_log.jpeg "Azure_pipeline_build_deploy_log")
 
 From now on every change to your code will trigger the CI/CD pipeline and update your webapp accordingly:
 
@@ -145,17 +145,17 @@ Change the application name in app.py from 'Sklearn Prediction Home' to 'Sklearn
 (.myrepo) odl_user [~/flask-project]$ nano app.py
 (.myrepo) odl_user [~/flask-project]$ git add app.py && git commit -m "Change app name" && git push
 ```
-![change_appname_and_push](screenshot/change_appname_and_push.JPEG "change_appname_and_push")
+![change_appname_and_push](screenshot/change_appname_and_push.jpeg "change_appname_and_push")
 App name before changing:
-![appname_before_change](screenshot/appname_before_change.JPEG "appname_before_change")
+![appname_before_change](screenshot/appname_before_change.jpeg "appname_before_change")
 App name after changing:
-![appname_changed](screenshot/appname_changed.JPEG "appname_changed")
+![appname_changed](screenshot/appname_changed.jpeg "appname_changed")
 
 The pipeline is triggered by each commit to GitHub Repo and actually that is the CI/CD
-![pipeline_triggered1](screenshot/pipeline_triggered1.JPEG "pipeline_triggered1")
-![pipeline_triggered2](screenshot/pipeline_triggered2.JPEG "pipeline_triggered2")
-![pipeline_triggered3](screenshot/pipeline_triggered3.JPEG "pipeline_triggered3")
-![pipeline_triggered4](screenshot/pipeline_triggered4.JPEG "pipeline_triggered4")
+![pipeline_triggered1](screenshot/pipeline_triggered1.jpeg "pipeline_triggered1")
+![pipeline_triggered2](screenshot/pipeline_triggered2.jpeg "pipeline_triggered2")
+![pipeline_triggered3](screenshot/pipeline_triggered3.jpeg "pipeline_triggered3")
+![pipeline_triggered4](screenshot/pipeline_triggered4.jpeg "pipeline_triggered4")
 
 
 ## Enhancements
